@@ -1687,11 +1687,12 @@ class ObjectManager extends Service {
 
 
                     // #test to replicate 1.0
+                    /*
                     if(isset($schema[$field]['onupdate'])) {
                         $onupdate_fields[] = $field;
                     }
+                    */
 
-                    /*
                     if($schema[$field]['type'] != 'computed') {
                         if(isset($schema[$field]['onupdate'])) {
                             $onupdate_fields[] = $field;
@@ -1712,7 +1713,8 @@ class ObjectManager extends Service {
                             }
                         }
                     }
-                    */
+
+
                     // assign cache to object values
                     $target_lang = $lang;
                     if($lang != constant('DEFAULT_LANG') && (!isset($schema[$field]['multilang']) || !$schema[$field]['multilang'])) {
@@ -1732,7 +1734,6 @@ class ObjectManager extends Service {
             // 7) second pass : handle onupdate events, if any
 
             // #test to replicate 1.0
-            /*
             if(count($onupdate_fields)) {
                 // #memo - several onupdate callbacks can, in turn, trigger a same other callback, which must then be called as many times as necessary
                 foreach($onupdate_fields as $field) {
@@ -1740,8 +1741,8 @@ class ObjectManager extends Service {
                     $this->callonce($class, $schema[$field]['onupdate'], $ids, $fields, $lang, ['ids', 'values', 'lang']);
                 }
             }
-            */
 
+            /*
             if(!$create) {
                 // #memo - this must be done after modifications otherwise object values might be outdated
                 if(count($onupdate_fields)) {
@@ -1758,6 +1759,7 @@ class ObjectManager extends Service {
                     }
                 }
             }
+            */
 
             // 8) handle the resetting of the dependent computed fields
 
