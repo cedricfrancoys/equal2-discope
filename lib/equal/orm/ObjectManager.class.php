@@ -1103,7 +1103,6 @@ class ObjectManager extends Service {
                     'db'])) {
                 $args[] = $this->container->get($param_name);
             }
-
             elseif(in_array($param_name, ['ids', 'oids'])) {
                 $args[] = $unprocessed_ids;
             }
@@ -1658,6 +1657,10 @@ class ObjectManager extends Service {
 
             // 4) call 'onbeforeupdate' hook : notify objects that they're about to be updated with given values
 
+
+            // #test to replicate 1.0
+            $this->callonce($class, 'onupdate', $ids, $fields, $lang);
+            /*
             if(!$create) {
                 if(method_exists($class, 'onbeforeupdate')) {
                     $this->callonce($class, 'onbeforeupdate', $ids, $fields, $lang);
@@ -1666,6 +1669,7 @@ class ObjectManager extends Service {
                     $this->callonce($class, 'onupdate', $ids, $fields, $lang);
                 }
             }
+            */
 
 
             // 5) update objects
@@ -1680,6 +1684,14 @@ class ObjectManager extends Service {
                 foreach($fields as $field => $value) {
                     // remember fields whose modification triggers an onupdate event
                     // #memo - computed fields assigned to null are meant to be re-computed without triggering onupdate
+
+
+                    // #test to replicate 1.0
+                    if(isset($schema[$field]['onupdate'])) {
+                        $onupdate_fields[] = $field;
+                    }
+
+                    /*
                     if($schema[$field]['type'] != 'computed') {
                         if(isset($schema[$field]['onupdate'])) {
                             $onupdate_fields[] = $field;
@@ -1700,6 +1712,7 @@ class ObjectManager extends Service {
                             }
                         }
                     }
+                    */
                     // assign cache to object values
                     $target_lang = $lang;
                     if($lang != constant('DEFAULT_LANG') && (!isset($schema[$field]['multilang']) || !$schema[$field]['multilang'])) {
@@ -1717,6 +1730,17 @@ class ObjectManager extends Service {
 
 
             // 7) second pass : handle onupdate events, if any
+
+            // #test to replicate 1.0
+            /*
+            if(count($onupdate_fields)) {
+                // #memo - several onupdate callbacks can, in turn, trigger a same other callback, which must then be called as many times as necessary
+                foreach($onupdate_fields as $field) {
+                    // run onupdate callback (ignore undefined methods)
+                    $this->callonce($class, $schema[$field]['onupdate'], $ids, $fields, $lang, ['ids', 'values', 'lang']);
+                }
+            }
+            */
 
             if(!$create) {
                 // #memo - this must be done after modifications otherwise object values might be outdated
@@ -1997,6 +2021,7 @@ class ObjectManager extends Service {
 
             // read all dot fields at once
             $this->load($class, $ids, array_keys($map_dot_fields), $lang);
+
 
             // recursively read sub objects
             foreach($map_dot_fields as $field => $sub_fields) {
