@@ -1659,8 +1659,10 @@ class ObjectManager extends Service {
 
 
             // #test to replicate 1.0
-            $this->callonce($class, 'onupdate', $ids, $fields, $lang);
             /*
+            $this->callonce($class, 'onupdate', $ids, $fields, $lang);
+            */
+
             if(!$create) {
                 if(method_exists($class, 'onbeforeupdate')) {
                     $this->callonce($class, 'onbeforeupdate', $ids, $fields, $lang);
@@ -1669,7 +1671,7 @@ class ObjectManager extends Service {
                     $this->callonce($class, 'onupdate', $ids, $fields, $lang);
                 }
             }
-            */
+
 
 
             // 5) update objects
