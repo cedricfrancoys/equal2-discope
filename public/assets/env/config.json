@@ -1,8 +1,8 @@
 {
     "production": "development",
-    "parent_domain": "equal.local",
-    "backend_url": "http://equal.local",
-    "rest_api_url": "http://equal.local/",
+    "parent_domain": "equal2discope.local",
+    "backend_url": "http://equal2discope.local",
+    "rest_api_url": "http://equal2discope.local/",
     "lang": "en",
     "locale": "fr",
     "version": "2.0.0",

@@ -39,6 +39,7 @@ jobs:
       - run: git -C packages clone https://github.com/cedricfrancoys/lodging-fork.git lodging
       - run: php run.php --do=init_package --package=lodging --import=true --test=true --import_cascade=false
       - run: php run.php --do=test_package --package=lodging
+      # touch
       # export logs on failure
       - run:
           command: |
