@@ -1,0 +1,361 @@
+{
+    "APP_NAME": {
+        "type": "string",
+        "description": "Specific brand name of the application, if any.",
+        "default": "eQual"
+    },
+    "APP_URL": {
+        "type": "string",
+        "deprecated": "Please use BACKEND_URL and DEFAULT_APP instead.",
+        "description": "The URL of the root folder (mapped with `./public`), with the scheme but without trailing slash (no path).",
+        "default": "http://equal.local"
+    },
+    "APP_LOGO_URL": {
+        "type": "string",
+        "description": "The URL of the image to be displayed in UI as App logo in the top left corner.",
+        "default": "/assets/img/logo.svg"
+    },
+    "APP_DEFAULT_LANG": {
+        "type": "string",
+        "description": "The language (ISO 639-1, amongst the installed languages) that must be selected by default in the Apps for displaying multilang contents.",
+        "default": "en"
+    },
+    "AUTH_SECRET_KEY": {
+        "type": "string",
+        "description": "Secret key used for hashing JWT data.",
+        "instant": true,
+        "default": "my_secret_key"
+    },
+    "AUTH_ACCESS_TOKEN_VALIDITY": {
+        "type": "integer",
+        "usage": "time/duration",
+        "description": "Validity duration of the access token, in seconds.",
+        "instant": true,
+        "default": 3600
+    },
+    "AUTH_TOKEN_HTTPS":{
+        "type": "boolean",
+        "description": "Flag for limiting the sending of auth token over HTTPS.",
+        "instant": true,
+        "default": false
+    },
+    "BACKEND_URL": {
+        "type": "string",
+        "description": "The URL of the root folder (mapped with `./public`), with the scheme but without trailing slash (no path).",
+        "default": "http://equal.local",
+        "examples": [
+            "http://equal.local",
+            "http://equal.local/index.php"
+        ]
+    },
+    "CIPHER_KEY": {
+        "type": "string",
+        "description": "Private key to use for secrets decryption. This property should be defined before any encryption/decryption operation.",
+        "instant": true,
+        "environment": "EQ_CIPHER_KEY",
+        "examples": [
+            "this is a secret key"
+        ]
+    },
+    "DB_REPLICATION": {
+        "type": "string",
+        "description": "Strategy to apply for database replication. Possible values are: 'NO': no replication; 'MS' ('master-slave', 2 servers) write operations are performed on both servers, read operations are performed on the master only; 'MM' ('multi-master'): any number of servers; write operations are performed on all servers, read operations can be performed on any server",
+        "instant": true,
+        "default": "NO",
+        "examples": [
+            "MS"
+        ]
+    },
+    "DB_DBMS": {
+        "type": "string",
+        "description": "Database Management System running on the DB host. Possible values are: 'MYSQL', 'SQLSRV', 'MARIADB', 'SQLITE', 'POSTGRESQL'",
+        "instant": true,
+        "default": "MYSQL",
+        "examples": [
+            "MARIADB",
+            "SQLSRV"
+        ]
+    },
+    "DB_CHARSET": {
+        "type": "string",
+        "description": "Charset encoding to use when manipulating strings with DBMS. The possible values depends on the DBMS.",
+        "help": [
+            "MySQL: MySQL/MariaDB handles UTF8 as utf8mb3 by default ('utf8' = 'utf8mb3'). For 4-byte unicode encoding, use 'utf8mb4'.",
+            "SQLSRV: SQLSRV cluster < 2019 does not support UTF-8, so this setting is ignored."
+        ],
+        "instant": true,
+        "default": "utf8mb4",
+        "examples": [
+            "utf8"
+        ]
+    },
+    "DB_COLLATION": {
+        "type": "string",
+        "description": "Collation to apply on SQL connection (and subsequent queries). The possible values depends on the DBMS.",
+        "help": [
+            "MySQL: Possible values are 'utf8_unicode_ci' (3 bytes) or 'utf8mb4_unicode_ci' (4 bytes) in most cases."
+        ],
+        "instant": true,
+        "default": "utf8mb4_unicode_ci",
+        "examples": [
+            "utf8_unicode_ci",
+            "LATIN1_GENERAL_100_CS_AS_SC"
+        ]
+    },
+    "DB_HOST": {
+        "type": "string",
+        "description": "IP address or fully qualified domain name (ex.: sql.example.com) of the DB host.",
+        "instant": true,
+        "environment": "EQ_DB_HOST",
+        "default": "127.0.0.1"
+    },
+    "DB_PORT": {
+        "type": "integer",
+        "description": "TCP/IP port for connecting to DB host.",
+        "help": [
+            "MySQL: default port for MySQL/MariaDB is 3306",
+            "SQLSRV: default port for MS SQL Server si 1433"
+        ],
+        "instant": true,
+        "environment": "EQ_DB_PORT",
+        "default": "3306"
+    },
+    "DB_USER": {
+        "type": "string",
+        "description": "Login for authenticating on DB host.",
+        "instant": true,
+        "environment": "EQ_DB_USER",
+        "default": "root"
+    },
+    "DB_PASSWORD": {
+        "type": "string",
+        "description": "Password for authenticating on DB host.",
+        "instant": true,
+        "environment": "EQ_DB_PASSWORD",
+        "default": "test"
+    },
+    "DB_NAME": {
+        "type": "string",
+        "description": "the name of the DB that you've created or plan to use.",
+        "instant": true,
+        "environment": "EQ_DB_NAME",
+        "default": "equal"
+    },
+    "DEFAULT_LANG": {
+        "type": "string",
+        "description": "The language (ISO 639-1) in which the multilang content must be provided/stored by default.",
+        "help": "This values impacts the way translations are stored. For a multilang application, unless specific conditions, this value should remain assigned to 'english' in order to allow correct management of multilang values.",
+        "instant": true,
+        "default": "en"
+    },
+    "DEFAULT_PACKAGE": {
+        "type": "string",
+        "description": "Package we'll try to access if nothing is specified in the url (typically while accessing root URL).",
+        "instant": true,
+        "default": "core"
+    },
+    "DEFAULT_APP": {
+        "type": "string",
+        "description": "Default App to request from default package.",
+        "instant": true,
+        "default": "welcome"
+    },
+    "DEFAULT_RIGHTS": {
+        "type": "integer",
+        "description": "Rights to grant to any user when no ACL is defined.",
+        "instant": true,
+        "default": 0,
+        "examples": [
+            0,
+            "EQ_R_READ | EQ_R_WRITE",
+            "EQ_R_CREATE | EQ_R_READ | EQ_R_DELETE | EQ_R_WRITE | EQ_R_MANAGE"
+        ]
+    },
+    "DEBUG_LEVEL": {
+        "type": "integer",
+        "description": "Types of error to report (defaults to E_ALL = 32767, setting to 0 means no logs). Important: if logging level is set to E_ALL with all mode enabled, then the log file grows quite quickly.",
+        "instant": true,
+        "default": "E_ALL | E_ALL",
+        "examples": [
+            "EQ_REPORT_DEBUG | EQ_REPORT_INFO | EQ_REPORT_WARNING | EQ_REPORT_ERROR | EQ_REPORT_FATAL",
+            "EQ_REPORT_INFO | EQ_REPORT_WARNING | EQ_REPORT_ERROR",
+            "EQ_REPORT_DEBUG & E_ALL"
+        ]
+    },
+    "DEBUG_MODE": {
+        "type": "integer",
+        "description": "Classes of report-messages to log (non-matching messages are ignored).",
+        "instant": true,
+        "default": "EQ_MODE_PHP | EQ_MODE_ORM | EQ_MODE_SQL",
+        "examples": [
+            "EQ_MODE_PHP | EQ_MODE_ORM | EQ_MODE_SQL | EQ_MODE_APP | EQ_MODE_API | EQ_MODE_AAA | EQ_MODE_NET"
+        ]
+    },
+    "DRAFT_VALIDITY": {
+        "type": "integer",
+        "description": "Duration in days before recycling draft objects.",
+        "default": 0
+    },
+    "EMAIL_SMTP_HOST": {
+        "type": "string",
+        "description": "Hostname of the SMTP server to use for sending emails.",
+        "instant": true,
+        "default": "SSL0.PROVIDER.NET"
+    },
+    "EMAIL_SMTP_PORT": {
+        "type": "string",
+        "description": "Port to use for SMTP connections.",
+        "instant": true,
+        "default": "2525"
+    },
+    "EMAIL_SMTP_ENCRYPT": {
+        "type": "string",
+        "description": "Encryption layer to use for SMTP connections ('tls' or 'ssl', false for SMTP with no encryption)",
+        "instant": true,
+        "default": "tls"
+    },
+    "EMAIL_SMTP_ACCOUNT_DISPLAYNAME": {
+        "type": "string",
+        "description": "",
+        "instant": true,
+        "default": "Yesbabylon Symbiose"
+    },
+    "EMAIL_SMTP_ACCOUNT_USERNAME": {
+        "type": "string",
+        "description": "Account name (or email address) to use to authenticate to SMTP server.",
+        "instant": true,
+        "default": "account.username"
+    },
+    "EMAIL_SMTP_ACCOUNT_PASSWORD": {
+        "type": "string",
+        "description": "Password to use to authenticate to SMTP server.",
+        "instant": true,
+        "default": "password"
+    },
+    "EMAIL_SMTP_ACCOUNT_EMAIL": {
+        "type": "string",
+        "description": "Email address to use as sender (must be allowed by SMTP server).",
+        "instant": true,
+        "default": "email.to.send.from@provider.com"
+    },
+    "EMAIL_SMTP_ABUSE_EMAIL": {
+        "type": "string",
+        "description": "",
+        "instant": true,
+        "default": "abuse@example.com"
+    },
+    "ENV_MODE": {
+        "type": "string",
+        "description": "Possible values are: 'development', 'staging', 'production'",
+        "instant": true,
+        "default": "development"
+    },
+    "FILE_STORAGE_MODE": {
+        "type": "string",
+        "description": "Storage mode for binary content. Possible values are: 'DB' (database) and 'FS' (filesystem).",
+        "instant": true,
+        "default": "DB"
+    },
+    "HTTP_REQUEST_TIMEOUT": {
+        "type": "integer",
+        "usage": "time/duration",
+        "description": "Maximum wait time, in seconds, before cancelling a pending HTTP request. Must not exceed `max_execution_time`.",
+        "instant": true,
+        "default": 10
+    },
+    "HTTP_PROCESS_USERNAME": {
+        "type": "string",
+        "description": "Username used by the HTTP service (for rights checks).",
+        "instant": true,
+        "default": "www-data"
+    },
+    "L10N_TIMEZONE": {
+        "type": "string",
+        "instant": true,
+        "description": "Preferred timezone for controllers that generate a static output. Locale params are only relevant for data controllers involving some output impacted by localization. By convention, timezone is always set to UTC for script processing (using `date_default_timezone_set('UTC');`).",
+        "default": "UTC"
+    },
+    "L10N_LOCALE": {
+        "type": "string",
+        "description": "Preferred locale for controllers that generate static output. Locale params are only relevant for data controllers involving some output impacted by localization.",
+        "default" : "fr"
+    },
+    "LOGGING_ENABLED": {
+        "type": "boolean",
+        "instant": true,
+        "default": true,
+        "description": "Keep in mind that enabling logging increases I/O operations."
+    },
+    "UPLOAD_MAX_FILE_SIZE": {
+        "type": "integer",
+        "usage": "amount/data",
+        "description": "Maximum authorized size for file upload (in bytes). Keep in mind that this parameter does not override the PHP 'upload_max_filesize' directive, o it can be more restrictive but will not be effective if set higher.",
+        "default": "64MB",
+        "examples": [
+            0,
+            32768,
+            "128MB"
+        ]
+    },
+    "MEM_FREE_LIMIT": {
+        "type": "integer",
+        "usage": "amount/data",
+        "description": "Minimum amount of free memory (in bytes) of the system (instance) below which no new process should start.",
+        "help": "This parameter is a threshold that eQual tries not to exceed (the task scheduler stops running tasks while free memory is below limit). However, under certain circumstances, this limit may still be momentarily surpassed. That value is complementary to the memory_limit set in php.ini (that limits the amount of memory that each PHP threads can use).",
+        "instant": true,
+        "environment": "EQ_MEM_LIMIT",
+        "default": "256MB",
+        "examples": [
+            "512MB",
+            "1GB"
+        ]
+    },
+    "ORG_NAME" : {
+        "type": "string",
+        "description": "Name of the organisation to which belongs the instance.",
+        "default": "eQual"
+    },
+    "ORG_URL": {
+        "type": "string",
+        "description": "URL of the official website of the organisation.",
+        "default": "https://equal.run"
+    },
+    "REST_API_URL": {
+        "type": "string",
+        "description": "The URL specific to the API path, if any. This URL should end with a slash ('/')",
+        "default": "http://equal.local/",
+        "examples": [
+            "http://equal.local/api/",
+            "http://equal.local/v1/"
+        ]
+    },
+    "ROOT_APP_URL": {
+        "type": "string",
+        "deprecated": "Please use BACKEND_URL instead.",
+        "description": "The URL of the root folder (mapped with `./public`), with the scheme but without trailing slash (no path).",
+        "default": "http://equal.local"
+    },
+    "USER_ACCOUNT_DISPLAYNAME": {
+        "type": "string",
+        "description": "Strategy for displaying the user name to other users. The expected value is a string holding one or more of following references: 'id', 'nickname', 'mail', 'firstname', 'lastname', 'initials' (Note: 'mail' is the email address and suits Apps restricted to users from a same organisation but should be avoided for non public profiles).",
+        "default": "mail",
+        "examples": [
+            "nickname",
+            "firstname lastname"
+        ]
+    },
+    "USER_ACCOUNT_REGISTRATION": {
+        "type": "boolean",
+        "description": "Flag telling if everyone is allowed to create a new user account.",
+        "default": false
+    },
+    "USER_ACCOUNT_VALIDATION": {
+        "type": "boolean",
+        "description": "Flag telling if a new user account needs to be validated before being active.",
+        "default": true
+    },
+    "VERSIONING_ENABLED": {
+        "type": "boolean",
+        "default": true
+    }
+}

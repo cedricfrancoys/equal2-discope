@@ -1,0 +1,25 @@
+{
+    "name": "User",
+    "description": "Simple form for displaying User",
+    "extends": {
+        "view": "form.default"
+    },
+    "layout": {
+        "update": {
+            "item.user_id": {
+                "attributes": {
+                    "width": "100%"
+                },
+                "before": [
+                    {
+                        "type": "field",
+                        "value": "validated",
+                        "width": "50%",
+                        "label": "Validated",
+                        "help": "Status of validation of this account."
+                    }
+                ]
+            }
+        }
+    }
+}

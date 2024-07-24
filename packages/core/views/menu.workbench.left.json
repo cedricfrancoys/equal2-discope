@@ -1,0 +1,41 @@
+{
+    "name": "Workbench menu",
+    "access": {
+        "groups": [
+            "users"
+        ]
+    },
+    "layout": {
+        "items": [
+            {
+                "id": "components",
+                "type": "entry",
+                "label": "Components",
+                "icon": "category",
+                "route": "/"
+            },
+            {
+                "id": "pipelines",
+                "type": "entry",
+                "label": "Pipelines",
+                "icon": "insights",
+                "route": "/pipelines"
+            },
+            {
+                "id": "uml",
+                "type": "parent",
+                "label": "UML",
+                "icon": "schema",
+                "children": [
+                    {
+                        "id": "uml.erd",
+                        "type": "entry",
+                        "label": "ERD",
+                        "icon": "account_tree",
+                        "route": "/uml"
+                    }
+                ]
+            }
+        ]
+    }
+}
